@@ -1,7 +1,7 @@
 (define (cube x) (* x x x))
 
 (define (close-result x y)
-  (/ (+(/ x (square y)) (* 2 x)) 3)
+  (/ (+(/ x (square y)) (* 2 y)) 3)
  )
 
 (define (square x) (* x x))
@@ -14,15 +14,18 @@
  )
 
 (define (improve guess x)
- (close-result guess x)
- )
+ (close-result x guess)
+  )
 
 (define (good-enough? guess x)
-  (> (abs (- (cube guess) x)) 0.0001) 
+  (< (abs (- (cube guess) x)) 0.001) 
  )
 
 (define (abs x)
- (if (< x 0) (- x) x)  
+ (if (< x 0)
+     (- x)
+	 x
+ )  
 )
 
 (define (cubic-root x) (cubic-root-iter 2.0 x))
